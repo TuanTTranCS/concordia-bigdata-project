@@ -6,7 +6,7 @@ Members are:
 3. Phan, Vu Hong Hai (Student ID: 40154023)
 4. Zhang, Yefei (Student ID: 40153319)
 
-There are two main concerns in this project: dataset analysis and algorithm implementation for tackle a commerce recommedation problem. The dataset will be a open one from kaggle or some simmilar source. 
+The team will work on both topics in this project: dataset analysis and algorithm implementation for tackle an e-commerce recommedation system's problem. The dataset will be a open one from kaggle or some simmilar source. 
 
 There are some prominent candidates dataset:
 1. Elo Merchant Category Recommendation, Kaggle
