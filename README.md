@@ -1,14 +1,14 @@
 # concordia-bigdata-project
-This is a project for Concordia's Bigdata class in Winter 2020.
-Members are:
+This is a project for Concordia's Bigdata class (SOEN691 UU) by Dr. Tristan Glatard in Winter 2020.
+Team Members:
 1. Le, Manh Quoc Dat (Student ID: 40153127)
 2. Tran, Trong Tuan (Student ID: 40151694)  
 3. Phan, Vu Hong Hai (Student ID: 40154023)
 4. Zhang, Yefei (Student ID: 40153319)
 
-The team will work on both topics in this project: dataset analysis and algorithm implementation for tackling of an e-commerce recommedation system's problem. The dataset will be a open one from Kaggle or some other alternative open sources. 
+The team will work on both topics in this project: dataset analysis and algorithm implementation, for tackling of an e-commerce recommedation system's problem. The dataset will be a open one from Kaggle or some other alternative open sources. 
 
-There are some prominent candidates datasets:
+There are some prominent candidate datasets:
 1. Elo Merchant Category Recommendation, Kaggle: https://www.kaggle.com/c/elo-merchant-category-recommendation
 2. Amazon Review Data 2018: https://nijianmo.github.io/amazon/index.html
 3. Goodreads Book Reviews: https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home
