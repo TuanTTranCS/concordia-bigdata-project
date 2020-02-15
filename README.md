@@ -18,7 +18,7 @@ Regarding to the algorithms, there are a lot of them and we need choose based on
 -->
 
 ## Abstract
-The data from wearable gadgets (i.e. smart watch) is a reliable source that provide lots of knowledge about substantial range of application such as health monitoring, physical training recommendation. Along with the increasing of quantity of data and quality, the need of getting most out of the data is more and more necessary. However, these data are heterogeneous, noisy, individual driven and sequential-based, which are the key challenger to process. In this project, the main interests of our group are analyzing and building models that can predict people's heart rates based on sequential data from sensors. The dataset is collected from endomondo.com by the authors of [], which contains about 200.000 records of over 1000 users with couple hundred million of sensor measurements and metadata. In the scope of this project, we are developing machine learning models with the main concern about being able to process timeseries big data.
+The data from wearable gadgets (i.e. smart watch) is a reliable source that provide lots of knowledge about substantial range of application such as health monitoring, physical training recommendation. Along with the increasing of quantity of data and quality, the need of getting most out of the data is more and more necessary. However, these data are heterogeneous, noisy, individual driven and sequential-based, which are the key challenger to process. In this project, the main interests of our group are analyzing and building models that can predict people's heart rates based on sequential data from sensors. The dataset is collected from endomondo.com by the authors of [1], which contains about 200.000 records of over 1000 users with couple hundred million of sensor measurements and metadata. In the scope of this project, we are developing machine learning models with the main concern about being able to process timeseries big data.
 
 ## Introduction
 The wearable gadgets such as smart watch are becoming more and more pupular at the time. With many sensors, they can provide lots of useful information about each individual user as well as the environment. With approriate data mining technique, we can use these data for a larger application domain such as context-aware health suppervise. To achive these such application, there are several challenges that need to overcome: (1) the collected data are sequential, various of types and noisy, (2) the activity patterns and subjects's condition changes over time and (3) the mining models are either need to be small enough to put on wearable gadgets or big enough to be able to handles huge amount of requests at a single time.
@@ -27,12 +27,12 @@ Under the course's scope, we devided our work to 2 main fold:
 1. Apply learned technique to analyst and preprocessing the dataset: the raw data contains lots of noisy, meta data that need to rectify. We also need to calculate several derive features to improve the models' performance.
 2. Implement machine learning models that can be scale in Spark: We are expected to implement at least two predition model in Spark to predict the heart rate of individual users given the context of the training such as historical workout, current heart rate and user-dependent features. We are plaining to impliment non-deep learning model only for the sake of processing time.
 
-Recently, there are several relevent work in mining sensor data for health area: [4] provides an overview of data mining research in healthcare and discussed about impact of these technique to pervasive sensing market; Farsevv et al. proposed a model that combine collected execise and social network data to predict user wellness trend (Body Mass Index - BMI) using AdaBoost-based method [9]; [8, 24] built context-aware models that applied in many fields such as recommendation, social network and clinical predictions using invidual information like BMI, age, gender.
+Recently, there are several relevent work in mining sensor data for health area: [2] provides an overview of data mining research in healthcare and discussed about impact of these technique to pervasive sensing market; Farsevv et al. proposed a model that combine collected execise and social network data to predict user wellness trend (Body Mass Index - BMI) using AdaBoost-based method [4]; [3, 24] built context-aware models that applied in many fields such as recommendation, social network and clinical predictions using invidual information like BMI, age, gender.
 
 ## Materials and Methods 
 
 ### Dataset
-The dataset used in this project is collected by Ni et al. in [] from endomondo.com. The data contains sensors data: heart rate, timestamps, distance, speed, ... and contextual data: gps location (longtitude and latitude), altitude, gender, sport and users' ID, ... The details of the dataset descibed in Table 1.
+The dataset used in this project is collected by Ni et al. in [1] from endomondo.com https://sites.google.com/eng.ucsd.edu/fitrec-project/home . The data contains sensors data: heart rate, timestamps, distance, speed, ... and contextual data: gps location (longtitude and latitude), altitude, gender, sport and users' ID, ... The details of the dataset descibed in Table 1.
 
 **Table 1**: Endomondo dataset details
 |Attribute|Quantity|
@@ -59,3 +59,10 @@ Since we are comparing with deep learning algorithms, we are not expect our algo
 
 ### Evaluation
 We will use the RMSE as the main scale to evaluate our effort. The training and testing dataset will be devided by each user's workout.
+
+## References
+[1]. Jianmo Ni, Larry Muhlstein, Julian McAuley, "Modeling heart rate and activity data for personalized fitness recommendation", in Proc. of the 2019 World Wide Web Conference (WWW'19), San Francisco, US, May. 2019.
+[2]. Hadi Banaee, Mobyen Uddin Ahmed, and Amy Loutfi. 2013. Data Mining for Wearable Sensors in Health Monitoring Systems: A Review of Recent Trends and Challenges. In Sensors
+[3]. Miguel Ramos de Araujo, Pedro Manuel Pinto Ribeiro, and Christos Faloutsos. 2017. TensorCast: Forecasting with Context Using Coupled Tensors (Best Paper Award). In ICDM 
+[4].  Aleksandr Farseev and Tat-Seng Chua. 2017. TweetFit: Fusing Multiple Social Media and Sensor Data for Wellness Profile Learning. In AAAI
+[5].  Soujanya Poria, Erik Cambria, Devamanyu Hazarika, Navonil Majumder, Amir Zadeh, and Louis-Philippe Morency. 2017. Multi-level Multiple Attentions for Contextual Multimodal Sentiment Analysis. In ICDM
