@@ -27,4 +27,35 @@ Under the course's scope, we devided our work to 2 main fold:
 1. Apply learned technique to analyst and preprocessing the dataset: the raw data contains lots of noisy, meta data that need to rectify. We also need to calculate several derive features to improve the models' performance.
 2. Implement machine learning models that can be scale in Spark: We are expected to implement at least two predition model in Spark to predict the heart rate of individual users given the context of the training such as historical workout, current heart rate and user-dependent features. We are plaining to impliment non-deep learning model only for the sake of processing time.
 
-Recently, there are several relevent work in this area. [4] provdies an overview of data mining 
+Recently, there are several relevent work in mining sensor data for health area: [4] provides an overview of data mining research in healthcare and discussed about impact of these technique to pervasive sensing market; Farsevv et al. proposed a model that combine collected execise and social network data to predict user wellness trend (Body Mass Index - BMI) using AdaBoost-based method [9]; [8, 24] built context-aware models that applied in many fields such as recommendation, social network and clinical predictions using invidual information like BMI, age, gender.
+
+## Materials and Methods 
+
+### Dataset
+The dataset used in this project is collected by Ni et al. in [] from endomondo.com. The data contains sensors data: heart rate, timestamps, distance, speed, ... and contextual data: gps location (longtitude and latitude), altitude, gender, sport and users' ID, ... The details of the dataset descibed in Table 1.
+
+**Table 1**: Endomondo dataset details
+|Attribute|Quantity|
+|---|---|
+|Number of workouts|253,020|
+|Number of users|1,104|
+|Average length (hours)|5.998|
+
+The data of each workout consist of 500 data points in flexible time intervals from seconds to serveral minutes. Therefore, we need to deal with these type of interval information. In this project, after analyst the data, our main goal is predict the heart rate of each user over the course of workout based on the sensors and contextual data. The heart rate prediction model then can help to warning user about the abnormal health condition, for recommending increase of decrease workout's intensivity.
+
+### Techniques and Algorithms
+We consider analyst the data is a part of preprocessing data to train the models. We exptected to find out some insight about data to selecting and deriving features, which can help improve the machine learning models' performance. The main analyst technique will be used are:
+1. Plotting and normalizing based on some distribution
+2. Calculate data's distribution: mean, deviation, ...
+3. Using non-supervised technique such as clustering to gain insight
+4. Calculate derived features, using interpolation and resampling technique to fill the missing data point
+
+After analyst and preprocessing data, we will feed the data to our implemented algorithms. We will used PySpark as the main framework and implement algorithms based on it. Since the gold for our predictor is predict the hear rate (beat per minute - BPM), the result can be accquired by two methods: (a) directly via a regression model  or (b) via a classification model with each amount of BPM is considered as a lable (since we consider about human heart beat, there will be only maximum 200 labels).
+
+We are considering these approach:
+1. Using window technique: We will slide the data using a fixed time-window and apply the implemented machine learning algorithm in PySpark such as regression and Random forest.
+2. Process sequential data as it is: There are various algorithms that can model sequential data. In this project, there are two candidates: Hidden Markov Model (HMM) and Conditional Random Field (CRF). These algorithms are very popular when dealing with sequential data such, especially natural language like text and voice. Our group will need to implement these algorithms and make sure they will work with Spark environment.
+Since we are comparing with deep learning algorithms, we are not expect our algorithm to out perform the original ones.
+
+### Evaluation
+We will use the RMSE as the main scale to evaluate our effort. The training and testing dataset will be devided by each user's workout.
