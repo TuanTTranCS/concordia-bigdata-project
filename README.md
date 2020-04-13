@@ -1,6 +1,6 @@
 # Concordia Big Data Course Project
 
-This is a project for Concordia's Big Data class (SOEN691 UU) by Dr. Tristan Glatard in Winter 2020. 
+This is a project for Concordia's Big Data class (SOEN691 UU) by Dr. Tristan Glatard in Winter 2020.
 Team Members:
 
 1. Le, Manh Quoc Dat (Student ID: 40153127)
