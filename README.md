@@ -76,7 +76,7 @@ The prediction model is tree-based, therefore we don't need to do feature standa
 
 One of the key hyper parameters is the width of the rolling window *k*. If *k* is too small, lots of information will be ignored and if *k* is too big, the number of features will be too big. In our implementation, we chose a reasonable size *k*=3.
 
-We use rando grid search and cross-validation for the model's hyper parameters selection. The number of folds for cross-validation is set to 5. The used metric is RMSE. The detail of the model can be found in the corresponding notebook.
+We use random grid search and cross-validation for the model's hyper parameters selection. The number of folds for cross-validation is set to 5. The used metric is RMSE. The detail of the model can be found in the corresponding notebook.
 
 **Table 2**: Contextual data and measurement description
 
