@@ -102,9 +102,9 @@ We will use RMSE (Root Mean Square Error) as the main metric to evaluate our eff
 
 *Note: we performed quite a lot of exploratory analyses but just summarize a few main points here. For more details, please go to the [Exploratory Analysis Notebook](https://github.com/HongHaiPV/concordia-bigdata-project/blob/master/BigData_Project_Explore.ipynb)*.
 
-#### Data Set Overview
+#### Dataset Overview
 
-We first worked with the raw data set from the original project. Original columns & data type:<br/>
+We first worked with the raw data set from the original project. Original columns & data type: <br/>
 <img src="images/explore_column_data_types.png" alt="column_types" />
 
 This is what the first 2 data rows look like:
@@ -130,18 +130,24 @@ During the exploration phase, we observed some abnormalities in some major colum
 <img src="images/explore_missing_data.png" alt="missing_data" />
 
 - The number of records in a per workout in a few workouts is abnormally low (`min` column):
-<img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat" width="550">
 
-- There are some record intervals (differences in 2 consecutive timestamps of a workout) way to high compared to 95th percentile, example:
-<img src="images/explore_filtering_max_interval.png" alt="explore_filtering_interval_stats.png" />
-- Statistical summary of heart rate by sport have some extreme outliers (mix/max) compared to normal range of 25-250 bpm:
-<img src="images/explore_filtering_heart_rate_stats.png" alt="explore_filtering_heart_rate_stats.png" />  
+<img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat" width="550" />
 
-Based on those abnormalities, we applied some filters for our data set to remove them:  
+- There are some record intervals way too high compared to the 95th percentile, example:
 
-1. Remove all rows containing heart rate below 25 and above 260 bpm
-2. Remove rows that have less than 50 records
-3. Remove rows having intervals larger than 278.35 (95th percentile of interval statistic)
+*(interval: difference between 2 consecutive timestamps of a workout)* 
+
+<img src="images/explore_filtering_max_interval.png" alt="explore_filtering_interval_stats.png">
+
+- Statistical summaries of heart rate by sport have some extreme outliers (mix/max) compared to normal range of 25-250 bpm:
+
+<img src="images/explore_filtering_heart_rate_stats.png" alt="explore_filtering_heart_rate_stats.png" />
+
+Based on those abnormalities, we applied some filters for our dataset to remove them:  
+
+1. Removed all rows containing heart rate below 25 and above 260 bpm
+2. Removed rows that have less than 50 records
+3. Removed rows having intervals larger than 278.35 (95th percentile of interval statistic)
 
 Final result after filtering:  <br/>
 
@@ -156,17 +162,18 @@ There are a lot of class imbalances in the data set.
 
 <img src="images/explore_unbalance_gender.png" alt="explore_unbalance_gender" width="400" />
 
-- Sport types imbalance, where a few sport took majority of the activities:
+- Sport types imbalance, where a few sports took majority of the activities:
 
 <img src="images/explore_unbalance_sports.png" alt="explore_unbalance_sports"  width="640" />
 
-*Those class imbalances might heavily impact the prediction accuracy, especially when predicting users belong to minority classes. So during our sampling phase for model training, we will make sure to sample across all genders & sports.*
+*Those class imbalances might heavily impact the prediction accuracy, especially when predicting users belong to minority classes. So during our sampling phase for model training, **we will make sure to sample across all genders & sports**.*
 
-#### Some record level plots for visualization purpose
+#### Some record-level plots for visualization purpose
 
-- Plot of heart rates on normalized time (duration from workout start), sampling from a few users
+- Plot of workouts' user heart rates on normalized time (duration from workout start), sampling from a few users
 
 <img src="images/explore_heart_rate_vs_time.png" alt="explore_heart_rate_vs_time" />
+
 - Plot of some workouts ’ routes on 3D graphs based on longitude, latitude & altitude:
 
 <img src="images/expore_workout_paths.png" alt="expore_workout_paths" />
@@ -178,16 +185,19 @@ There are a lot of class imbalances in the data set.
 #### Some basic analyses
 
 - Difference in average heart rate between male vs. female across sports:
-<img src="images/inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" alt="inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" width="550" /> 
+
+<img src="images/inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" alt="inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" width="550" />
 
 This plot showed that in most of the sports having both genders participated, average heart rates of female are higher than male's.
 
 - Difference in average Pearson coefficients of (heart rate, altitude) vs. average coefficients of (heart rate, speed):
 
 <img src="images/inferences_pierson_coe_diff.png" alt="inferences_pierson_coe_diff" width="640" />
+
 The 2 charts show that for both males and females, the average correlation between heart rate and altitude vs heart rate and speed are not too much different.
 
 - Comparison between average of heart rate, speed and altitude across workouts started at different time periods of the day:
+
 <img src="images/inference_avg_measurements_by_periods.png" alt="inference_avg_measurements_by_periods" />
 
 Again, for overall, average speed, altitude  and heart rate are not different among time periods.
@@ -210,7 +220,7 @@ The summary plots on k-means results showed that average heart rate and speed do
 
 **Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out** 
 
-The RMSE of our regression's model is *3.8*, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
+The RMSE of our regression's model is **3.8**, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
 
 From the result, we find out that the model performs better for the sport that is less affected by the environmental condition. This suggests we need to add more contextual information to achieve a better result.
 From the model, we extracted the top 5 importance features at the timestamp *t* , which are:
@@ -223,10 +233,7 @@ We can see that the heart rate variation (trend) along with speed has an importa
 
 ### Limitations
 
-- Random Forest algorithm’s disadvantages [6]:
-  - It takes a huge amount of computational costs and memory to train a large number of deep trees.
-  - Predictions are slower so that it could put challenges and pressure on applications.
-  - The model created by the Random Forest algorithm is less explainable than an individual decision tree.
+Along with Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
 
 ### Future Work
 
