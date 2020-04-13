@@ -220,15 +220,23 @@ The summary plots on k-means results showed that average heart rate and speed do
  
 ### Prediction Model
 
+**Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out** 
 
-## Discussion
+The RMSE of our regression's model is **3.8**, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
+
+From the result, we find out that the model performs better for the sport that is less affected by the environmental condition. This suggests we need to add more contextual information to achieve a better result. 
+From the model, we extracted the top 5 importance features at the timestamp *t* , which are:
+Heart rate variation from timestamp *t-2* to *t-1*
+Elapsed time from the last measurement
+The current speed
+The heart rate at the timestamp *t-2*
+The standard variation of heart rate
+We can see that the heart rate variation (trend) along with speed has an important role to decide the current heart rate. The elapsed time is also an important feature because elapsed time and heart rate variation is 2 fundamentals variable to build the trending function.
+
 
 ### Limitations
 
-- Random Forest algorithm’s disadvantages [6]:
-  - It takes a huge amount of computational costs and memory to train a large number of deep trees.
-  - Predictions are slower so that it could put challenges and pressure on applications.
-  - The model created by the Random Forest algorithm is less explainable than an individual decision tree.
+Along with Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
 
 ### Future Work
 
