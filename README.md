@@ -219,7 +219,8 @@ We applied k-means clustering technique to group similar users, based on their g
 The summary plots on k-means results showed that average heart rate and speed do not differ much among groups, only the obvious difference is average altitude.
 
 ### Prediction model result
-**Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out** 
+
+**Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out**
 
 The RMSE of our regression's model is **3.8**, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
 
@@ -236,7 +237,7 @@ We can see that the heart rate variation (trend) along with speed has an importa
 
 ### Limitations
 
-Along with some Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
+Along with some Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications, and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
 
 ### Future Work
 
