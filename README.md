@@ -99,7 +99,9 @@ We first worked with the raw data set from the original project. Original column
 <img src="images/explore_column_data_types.png" alt="column_types">
 
 This is what the first 2 data rows look like:
+
 <img src="images/explore_first_2_rows.png" alt="first_2_rows">
+
 *Based on the column type, data frame description and the first 2 rows, we know that each data row is a record of a workout of a single user, with the associated activity type (sport) and other data like heart rates, locations and record times (timestamp).*<br />
  
 High level summary of the data set:
@@ -110,13 +112,16 @@ High level summary of the data set:
  
 #### Filtering
 During the exploration phase, we observed some abnormalities in some major columns.
+
 - Missing / abnormal values across columns:
   - For string columns, we check for None and null
   - For numeric columns, we check for zeros and NaN
   - For array type columns, we check if the array contain zeroes or NaN
-<img src="images/explore_first_2_rows.png" alt="missing_data">
+<img src="images/explore_missing_data.png" alt="missing_data">
+
 - The number of records in a per workout in a few workouts is abnormally low (`min` column):
-<img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat">
+<img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat" width="75%">
+
 - There are some record intervals (differences in 2 consecutive timestamps of a workout) way to high compared to 95th percentile, example: 
 <img src="images/explore_filtering_max_interval.png" alt="explore_filtering_interval_stats.png">
 - Statistical summary of heart rate by sport have some extreme outliers (mix/max) compared to normal range of 25-250 bpm:
@@ -177,9 +182,12 @@ We applied k-means clustering technique to group similar users, based on their g
 <img src="images/inference_kmeans_coordinates.png" alt="inference_kmeans_coordinates">
 
 *Each feature above was **weighted by a predefined number** and also was **standardized by scaling factors** when calculating distances from users to centroids.* <br />
+
 - K-means result:
-<img src="images/inferences_kmeans_converged.png" alt="inferences_kmeans_converged" width="75%">
+<img src="images/inferences_kmeans_converged.png" alt="inferences_kmeans_converged" width="200">
+
 <img src="images/inferences_kmeans_plot.png" alt="inferences_kmeans_plot">
+
 The summary plots on k-means results showed that average heart rate and speed do not differ much among groups, only the obvious difference is average altitude.
  
  
