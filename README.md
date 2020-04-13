@@ -222,6 +222,8 @@ The summary plots on k-means results showed that average heart rate and speed do
 
 **Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out**
 
+*Prediction model training code: [Prediction Model](https://github.com/HongHaiPV/concordia-bigdata-project/blob/master/ML_model.ipynb)*
+
 The RMSE of our regression's model is **3.8**, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
 
 ![Feature importances](images/feature_importance.png)
