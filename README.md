@@ -90,6 +90,11 @@ We using rando grid search and cross-validation for the model's hyper parameters
 |Sport|String||
 |Gender|String|Male, female|
 
+### Evaluation
+
+We will use RMSE (Root Mean Square Error) as the main metric to evaluate our efforts. The training and testing dataset will be divided by each user's workout.
+
+
 ## Results
  
 ### Exploratory Data Analysis
@@ -200,10 +205,6 @@ The summary plots on k-means results showed that average heart rate and speed do
  
 ### Prediction Model
 
-
-### Evaluation
-
-We will use RMSE as the main metric to evaluate our efforts. The training and testing dataset will be divided by each user's workout.
 
 ## Discussion
 
