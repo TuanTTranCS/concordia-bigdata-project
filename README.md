@@ -231,9 +231,11 @@ The heart rate at the timestamp *t-2*
 The standard variation of heart rate
 We can see that the heart rate variation (trend) along with speed has an important role to decide the current heart rate. The elapsed time is also an important feature because elapsed time and heart rate variation is 2 fundamentals variable to build the trending function.
 
+## Discussion
+
 ### Limitations
 
-Along with Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
+Along with some Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
 
 ### Future Work
 
