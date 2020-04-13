@@ -223,6 +223,8 @@ The summary plots on k-means results showed that average heart rate and speed do
 
 The RMSE of our regression's model is **3.8**, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
 
+![Feature importances](images/feature_importance.png)
+
 From the result, we find out that the model performs better for the sport that is less affected by the environmental condition. This suggests we need to add more contextual information to achieve a better result.
 From the model, we extracted the top 5 importance features at the timestamp *t* , which are:
 Heart rate variation from timestamp *t-2* to *t-1*
