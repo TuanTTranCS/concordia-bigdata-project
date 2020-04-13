@@ -31,7 +31,7 @@ The wearable gadgets such as smartwatches are becoming more and more popular now
 1. Apply learned techniques to analyze and preprocess the dataset: the raw data contains lots of noisy metadata that need to rectify. We also need to calculate several derived features to improve the models' performance.
 2. Implement ML models that can be scaled in Spark: We expect to implement at least two prediction models in Spark to predict the heart rate of individual users based on the context of the training such as historical workout, current heart rate, and user-dependent features. We are planning to implement non-deep learning models only for the sake of limited processing time.
   
-Recently, there were several relevant works in mining sensor data for health area: [2] provided an overview of data mining research in healthcare and discussed the impact of these techniques on pervasive sensing market; Farseev et al. proposed a model that combined collected exercises and social network data to predict users’ wellness trend (Body Mass Index - BMI) using AdaBoost-based method [4]; [3, 24] built context-aware models that applied in many fields such as recommendation, social network and clinical predictions using individual information like BMI, age, gender, etc..
+Recently, there were several relevant works in mining sensor data for health area: [2] provided an overview of data mining research in healthcare and discussed the impact of these techniques on pervasive sensing market; Farseev et al. proposed a model that combined collected exercises and social network data to predict users’ wellness trend (Body Mass Index - BMI) using AdaBoost-based method [4]; [3, 24] built context-aware models that applied in many fields such as recommendation, social network and clinical predictions using individual information like BMI, age, gender, etc.
   
 ## Materials and Methods  
   
@@ -54,7 +54,7 @@ The dataset of each workout consists of 500 data points recorded through flexibl
 We consider data analysis as part of pre-processing data to train the models. We are expected to find some insights about data to selecting and deriving features, which can help improve the ML models' performance. The main pre-exploratory techniques will be used are:
 
 1. Plotting and normalizing based on some distribution for each data type
-2. Calculating data's common statistics: mean, standard deviation, ...
+2. Calculating data's common statistics: mean, standard deviation, etc.
 3. Using the non-supervised techniques such as clustering to gain insight
 4. Generating derived features, using interpolation and resampling technique to fill missing data points
   
