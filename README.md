@@ -51,19 +51,44 @@ The dataset of each workout consists of 500 data points recorded through flexibl
   
 ### Techniques and Algorithms
 
-We consider data analysis as part of pre-processing data to train the models. We are expected to find some insights about data to selecting and deriving features, which can help improve the ML models' performance. The main pre-exploratory techniques will be used are:
+We consider data analysis as a part of preprocessing data to train the models. We are expected to find some insights about data to selecting and deriving features, which can help improve the ML models' performance. The main pre-exploratory techniques will be used are: 
 
-1. Plotting and normalizing based on some distribution for each data type
-2. Calculating data's common statistics: mean, standard deviation, etc.
-3. Using the non-supervised techniques such as clustering to gain insight
-4. Generating derived features, using interpolation and resampling technique to fill missing data points
+1. Plotting and normalizing based on some distribution for each data type 
+2. Calculating data's common statistics: mean, standard deviation, ... 
+3. Using unsupervised techniques such as clustering to gain insight 
+4. Generating derived features, using interpolation and resampling technique to fill missing data points 
   
-After analyzing and preprocessing data, we will feed the data to our implemented algorithms, and base on PySpark as the main framework. Since the goal of our predictor is to predict the heart rate (beats per minute - BPM), the result can be acquired by two methods: (a) directly via a regression model, or (b) via a classification model with each specific value of BPM is considered as a label (considering about human heartbeats, there will be only maximum 200 labels).
- We will consider two approaches:
+After analyzing and preprocessing data, we will feed the data to our implemented algorithms, and base on PySpark as the main framework. Since the goal of our predictor is to predict the heart rate (beats per minute - BPM), the result can be acquired by two methods: (a) directly via a regression model, or (b) via a classification model with each specific value of BPM is considered as a label (considering about human heartbeats, there will be only maximum 200 labels). After considering multiple approaches, we decided to implement Rolling window technique with Regression random forest. The idea is to predict the value at the time step *t*, the model just needs information from *k* previous time steps. 
 
-1. Using window technique: We will slice the data using a fixed time-window and apply the available ML algorithms in PySpark such as Random Forest Regression.
-2. Processing sequential data as-is: There are various algorithms that can model sequential data. In this project, there are two candidates: Hidden Markov Model (HMM) and Conditional Random Field (CRF). These algorithms are very popular when dealing with such kind sequential data, especially in natural language processing like text and voice. Our group will implement these algorithms and make sure they will work with the Spark environment (maybe through another adaptor like Yahoo’s TensorFlowOnSpark).
-Of course, with the non-deep learning methods, we do not expect our algorithms to outperform the original ones from the mainly referred article [1]. However, at least we can have a chance to compare the effectiveness of our 2 proposed approaches.  
+The variable in the dataset described in Table 2. We also need to derive some other features for our model:
+1. The distance between 2 consecutive timestamps
+2. The vacant speed at the current timestamps (missing data or lack of sensor)
+3. The time of day
+
+Since we are applying the traditional machine learning technique, feature engineering affects heavily to the performance of the prediction model. In this work, at each window, the features are:
+1. Categorical features: sport, gender
+2. Sequence features: longitude, latitude, altitude, time (hour), speed, heart rate, time variation, heart rate variation, speed, distance. These features are taken from every timestamp of the rolling window (except the heart rate and heart rate variation of current timestamp, of course)
+3. Aggregation features: min, max, mean, standard variation of features in 2
+
+The prediction model is tree-based, therefore we don't need to do feature standardization.
+
+One of the key hyper parameters is the width of the rolling window *k*. If *k* is too small, lots of information will be ignored and if *k* is too big, the number of features will be too big. In our implementation, we chose a reasonable size *k*=3. 
+
+We using rando grid search and cross-validation for the model's hyper parameters selection. The number of folds for cross-validation is set to 5. The used metric is RMSE. The detail of the model can be found in the corresponding notebook.
+
+**Table 2**: Contextual data and measurement description
+
+|Variable|Type|Unit|
+|---|---|---|
+|Heart rate|Sequence|Beat per minute| 
+|Timestamp|Sequence|Unix timestamp|
+|Speed|Sequence|Mile per hour|
+|Longitude|Sequence|Degree|
+|Latitude|Sequence|Degree|
+|Altitude|Sequence|Ft|
+|User ID|String||
+|Sport|String||
+|Gender|String|Male, female|
 
 ### Evaluation
 
