@@ -205,8 +205,19 @@ The summary plots on k-means results showed that average heart rate and speed do
  
 ### Prediction Model
 
+**Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out** 
 
-## Discussion
+The RMSE of our regression's model is *3.8*, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
+
+From the result, we find out that the model performs better for the sport that is less affected by the environmental condition. This suggests we need to add more contextual information to achieve a better result. 
+From the model, we extracted the top 5 importance features at the timestamp *t* , which are:
+Heart rate variation from timestamp *t-2* to *t-1*
+Elapsed time from the last measurement
+The current speed
+The heart rate at the timestamp *t-2*
+The standard variation of heart rate
+We can see that the heart rate variation (trend) along with speed has an important role to decide the current heart rate. The elapsed time is also an important feature because elapsed time and heart rate variation is 2 fundamentals variable to build the trending function.
+
 
 ### Limitations
 
