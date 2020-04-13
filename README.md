@@ -99,7 +99,7 @@ We will use RMSE (Root Mean Square Error) as the main metric to evaluate our eff
  
 ### Exploratory Data Analysis
 *Note: we performed quite a lot of exploratory analyses but just summarize a few main points here. For more details, please go to the [Exploratory Analysis Notebook](https://github.com/HongHaiPV/concordia-bigdata-project/blob/master/BigData_Project_Explore.ipynb)*.
-#### Data Set Overview
+#### Dataset Overview
 We first worked with the raw data set from the original project. Original columns & data type: <br />
 <img src="images/explore_column_data_types.png" alt="column_types">
 
@@ -109,7 +109,7 @@ This is what the first 2 data rows look like:
 
 *Based on the column type, data frame description and the first 2 rows, we know that each data row is a record of a workout of a single user, with the associated activity type (sport) and other data like heart rates, locations and record times (timestamp).*<br />
  
-High level summary of the data set:
+High level summary of the dataset:
  
 |Users count|Activity types count|Workouts count|Total records count|
 |---|---|---|---|
@@ -119,24 +119,31 @@ High level summary of the data set:
 During the exploration phase, we observed some abnormalities in some major columns.
 
 - Missing / abnormal values across columns:
-  - For string columns, we check for None and null
-  - For numeric columns, we check for zeros and NaN
-  - For array type columns, we check if the array contain zeroes or NaN
+  - For string columns, we checked for None and null
+  - For numeric columns, we checked for zeros and NaN
+  - For array type columns, we checked if the array contained zeroes or NaN
+
 <img src="images/explore_missing_data.png" alt="missing_data">
 
 - The number of records in a per workout in a few workouts is abnormally low (`min` column):
+
 <img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat" width="550">
 
-- There are some record intervals (differences in 2 consecutive timestamps of a workout) way to high compared to 95th percentile, example: 
+- There are some record intervals way too high compared to the 95th percentile, example:
+
+*(interval: difference between 2 consecutive timestamps of a workout)* 
+
 <img src="images/explore_filtering_max_interval.png" alt="explore_filtering_interval_stats.png">
-- Statistical summary of heart rate by sport have some extreme outliers (mix/max) compared to normal range of 25-250 bpm:
+
+- Statistical summaries of heart rate by sport have some extreme outliers (mix/max) compared to normal range of 25-250 bpm:
+
 <img src="images/explore_filtering_heart_rate_stats.png" alt="explore_filtering_heart_rate_stats.png">  
  
-Based on those abnormalities, we applied some filters for our data set to remove them:  
+Based on those abnormalities, we applied some filters for our dataset to remove them:  
 
-1. Remove all rows containing heart rate below 25 and above 260 bpm
-2. Remove rows that have less than 50 records
-3. Remove rows having intervals larger than 278.35 (95th percentile of interval statistic)
+1. Removed all rows containing heart rate below 25 and above 260 bpm
+2. Removed rows that have less than 50 records
+3. Removed rows having intervals larger than 278.35 (95th percentile of interval statistic)
 
 Final result after filtering:  <br />
 
@@ -152,16 +159,18 @@ There are a lot of class imbalances in the data set.
 
 <img src="images/explore_unbalance_gender.png" alt="explore_unbalance_gender" width="400">
 
-- Sport types imbalance, where a few sport took majority of the activities:
+- Sport types imbalance, where a few sports took majority of the activities:
 
 <img src="images/explore_unbalance_sports.png" alt="explore_unbalance_sports"  width="640">
 
-*Those class imbalances might heavily impact the prediction accuracy, especially when predicting users belong to minority classes. So during our sampling phase for model training, we will make sure to sample across all genders & sports.*
-#### Some record level plots for visualization purpose
+*Those class imbalances might heavily impact the prediction accuracy, especially when predicting users belong to minority classes. So during our sampling phase for model training, **we will make sure to sample across all genders & sports**.*
 
-- Plot of heart rates on normalized time (duration from workout start), sampling from a few users
+#### Some record-level plots for visualization purpose
+
+- Plot of workouts' user heart rates on normalized time (duration from workout start), sampling from a few users
 
 <img src="images/explore_heart_rate_vs_time.png" alt="explore_heart_rate_vs_time">
+
 - Plot of some workouts ’ routes on 3D graphs based on longitude, latitude & altitude:
 
 <img src="images/expore_workout_paths.png" alt="expore_workout_paths">
@@ -173,6 +182,7 @@ There are a lot of class imbalances in the data set.
 #### Some basic analyses
 
 - Difference in average heart rate between male vs. female across sports:
+
 <img src="images/inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" alt="inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" width="550"> 
 
 This plot showed that in most of the sports having both genders participated, average heart rates of female are higher than male's.
@@ -180,9 +190,11 @@ This plot showed that in most of the sports having both genders participated, av
 - Difference in average Pearson coefficients of (heart rate, altitude) vs. average coefficients of (heart rate, speed):
 
 <img src="images/inferences_pierson_coe_diff.png" alt="inferences_pierson_coe_diff" width="640">
+
 The 2 charts show that for both males and females, the average correlation between heart rate and altitude vs heart rate and speed are not too much different.
 
 - Comparison between average of heart rate, speed and altitude across workouts started at different time periods of the day:
+
 <img src="images/inference_avg_measurements_by_periods.png" alt="inference_avg_measurements_by_periods">
 
 Again, for overall, average speed, altitude  and heart rate are not different among time periods.
@@ -190,12 +202,15 @@ Again, for overall, average speed, altitude  and heart rate are not different am
 #### K-means clustering to find similar users
 
 We applied k-means clustering technique to group similar users, based on their gender, workout counts per period, workout count per sport, average heart rate, average speed and average altitude per workout (Since it’s just a preprocessing step, we did not put much resources to reach record level measurements, but just on average per workout level).  <br />
+
 - Example of users’ coordinate vectors: 
+
 <img src="images/inference_kmeans_coordinates.png" alt="inference_kmeans_coordinates">
 
 *Each feature above was **weighted by a predefined number** and also was **standardized by scaling factors** when calculating distances from users to centroids.* <br />
 
 - K-means result:
+
 <img src="images/inferences_kmeans_converged.png" alt="inferences_kmeans_converged" width="250">
 
 <img src="images/inferences_kmeans_plot.png" alt="inferences_kmeans_plot">
