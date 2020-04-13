@@ -92,6 +92,10 @@ We use rando grid search and cross-validation for the model's hyper parameters s
 |Sport|String||
 |Gender|String|Male, female|
 
+### Evaluation
+
+We will use RMSE (Root Mean Square Error) as the main metric to evaluate our efforts. The training and testing dataset will be divided by each user's workout.
+
 ## Results
 
 ### Exploratory Data Analysis
@@ -126,7 +130,7 @@ During the exploration phase, we observed some abnormalities in some major colum
 <img src="images/explore_missing_data.png" alt="missing_data" />
 
 - The number of records in a per workout in a few workouts is abnormally low (`min` column):
-<img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat" width="75%" />
+<img src="images/explore_workout_count_stat.png" alt="explore_workout_count_stat" width="550">
 
 - There are some record intervals (differences in 2 consecutive timestamps of a workout) way to high compared to 95th percentile, example:
 <img src="images/explore_filtering_max_interval.png" alt="explore_filtering_interval_stats.png" />
@@ -148,19 +152,23 @@ Final result after filtering:  <br/>
 #### Class Imbalance
 
 There are a lot of class imbalances in the data set.
-
 - Gender imbalance, where males’ users and activities are dominant vs. females’:
-<img src="images/explore_unbalance_gender.png" alt="explore_unbalance_gender" />
+
+<img src="images/explore_unbalance_gender.png" alt="explore_unbalance_gender" width="400" />
+
 - Sport types imbalance, where a few sport took majority of the activities:
-<img src="images/explore_unbalance_sports.png" alt="explore_unbalance_sports" />
+
+<img src="images/explore_unbalance_sports.png" alt="explore_unbalance_sports"  width="640" />
 
 *Those class imbalances might heavily impact the prediction accuracy, especially when predicting users belong to minority classes. So during our sampling phase for model training, we will make sure to sample across all genders & sports.*
 
 #### Some record level plots for visualization purpose
 
 - Plot of heart rates on normalized time (duration from workout start), sampling from a few users
+
 <img src="images/explore_heart_rate_vs_time.png" alt="explore_heart_rate_vs_time" />
 - Plot of some workouts ’ routes on 3D graphs based on longitude, latitude & altitude:
+
 <img src="images/expore_workout_paths.png" alt="expore_workout_paths" />
   
 ### Statistical Inferences
@@ -170,12 +178,13 @@ There are a lot of class imbalances in the data set.
 #### Some basic analyses
 
 - Difference in average heart rate between male vs. female across sports:
-<img src="images/inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" alt="inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" width="75%" /> 
+<img src="images/inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" alt="inferences_avg_heart_rate_diff_male_vs_female_by_sport.png" width="550" /> 
 
 This plot showed that in most of the sports having both genders participated, average heart rates of female are higher than male's.
 
 - Difference in average Pearson coefficients of (heart rate, altitude) vs. average coefficients of (heart rate, speed):
-<img src="images/inferences_pierson_coe_diff.png" alt="inferences_pierson_coe_diff" />
+
+<img src="images/inferences_pierson_coe_diff.png" alt="inferences_pierson_coe_diff" width="640" />
 The 2 charts show that for both males and females, the average correlation between heart rate and altitude vs heart rate and speed are not too much different.
 
 - Comparison between average of heart rate, speed and altitude across workouts started at different time periods of the day:
@@ -190,20 +199,27 @@ We applied k-means clustering technique to group similar users, based on their g
 - Example of users’ coordinate vectors:
 <img src="images/inference_kmeans_coordinates.png" alt="inference_kmeans_coordinates" />
 
-*Each feature above was **weighted by a predefined number** and also was **standardized by scaling factors** when calculating distances from users to centroids.* <br />
+*Each feature above was **weighted by a predefined number** and also was **standardized by scaling factors** when calculating distances from users to centroids.* <br/>
 
 - K-means result:
-<img src="images/inferences_kmeans_converged.png" alt="inferences_kmeans_converged" width="200" />
+<img src="images/inferences_kmeans_converged.png" alt="inferences_kmeans_converged" width="250" />
+
+<img src="images/inferences_kmeans_plot.png" alt="inferences_kmeans_plot" />
 
 The summary plots on k-means results showed that average heart rate and speed do not differ much among groups, only the obvious difference is average altitude.
 
-### Prediction Model
+**Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out** 
 
-### Evaluation
+The RMSE of our regression's model is *3.8*, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
 
-We will use RMSE as the main metric to evaluate our efforts. The training and testing dataset will be divided by each user's workout.
-
-## Discussion
+From the result, we find out that the model performs better for the sport that is less affected by the environmental condition. This suggests we need to add more contextual information to achieve a better result.
+From the model, we extracted the top 5 importance features at the timestamp *t* , which are:
+Heart rate variation from timestamp *t-2* to *t-1*
+Elapsed time from the last measurement
+The current speed
+The heart rate at the timestamp *t-2*
+The standard variation of heart rate
+We can see that the heart rate variation (trend) along with speed has an important role to decide the current heart rate. The elapsed time is also an important feature because elapsed time and heart rate variation is 2 fundamentals variable to build the trending function.
 
 ### Limitations
 
