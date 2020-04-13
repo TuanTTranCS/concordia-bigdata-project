@@ -221,10 +221,7 @@ We can see that the heart rate variation (trend) along with speed has an importa
 
 ### Limitations
 
-- Random Forest algorithm’s disadvantages [6]:
-  - It takes a huge amount of computational costs and memory to train a large number of deep trees.
-  - Predictions are slower so that it could put challenges and pressure on applications.
-  - The model created by the Random Forest algorithm is less explainable than an individual decision tree.
+Along with Random Forest algorithm’s disadvantages [6] such as: huge amount of computational costs and memory to train a large number of deep trees, predictions are slower so that it could put challenges and pressure on applications and the trained model is less explainable than an individual decision tree; the rolling window approach also ignores the long term relation between features from the previous timestamp and involve heavy feature engineering.
 
 ### Future Work
 
