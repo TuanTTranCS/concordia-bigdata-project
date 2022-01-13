@@ -100,7 +100,7 @@ We will use RMSE (Root Mean Square Error) as the main metric to evaluate our eff
 
 ### Exploratory Data Analysis
 
-*Note: we performed quite a lot of exploratory analyses but just summarize a few main points here. For more details, please go to the [Exploratory Analysis Notebook](https://github.com/HongHaiPV/concordia-bigdata-project/blob/master/BigData_Project_Explore.ipynb)*.
+*Note: we performed quite a lot of exploratory analyses but just summarize a few main points here. For more details, please go to the [Exploratory Analysis Notebook](https://github.com/littleghost1712/concordia-bigdata-project/blob/master/BigData_Project_Explore.ipynb)*.
 
 #### Dataset Overview
 
@@ -180,7 +180,7 @@ There are a lot of class imbalances in the data set.
   
 ### Statistical Inferences
 
-*Note: Details on statistical inferences section can be seen in the [Statistical Inferences Notebook](https://github.com/HongHaiPV/concordia-bigdata-project/blob/master/BigData_Project_Statistical_Inferences.ipynb)*
+*Note: Details on statistical inferences section can be seen in the [Statistical Inferences Notebook](https://github.com/littleghost1712/concordia-bigdata-project/blob/master/BigData_Project_Statistical_Inferences.ipynb)*
 
 #### Some basic analyses
 
@@ -222,7 +222,7 @@ The summary plots on k-means results showed that average heart rate and speed do
 
 **Since we have some technical issue with our cluster in the lab, the result shown here is achieved from a sub-sampled data set with only 200 work out**
 
-*Prediction model training code: [Prediction Model](https://github.com/HongHaiPV/concordia-bigdata-project/blob/master/ML_model.ipynb)*
+*Prediction model training code: [Prediction Model](https://github.com/littleghost1712/concordia-bigdata-project/blob/master/ML_model.ipynb)*
 
 The RMSE of our regression's model is **3.8**, a solid result when comparing to the scale of heart rate. With this result, we can confidently give recommendations for users if their heart rate is slightly lower or higher than the predicted one, for example, minus or plus 5. We can also alert if the user's heart rate exceeds the safe region (for example plus 10 when compared to the predicted result).
 
