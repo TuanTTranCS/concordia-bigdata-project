@@ -100,7 +100,7 @@ We will use RMSE (Root Mean Square Error) as the main metric to evaluate our eff
 
 ### Exploratory Data Analysis
 
-*Note: we performed quite a lot of exploratory analyses but just summarize a few main points here. For more details, please go to the [Exploratory Analysis Notebook](https://github.com/littleghost1712/concordia-bigdata-project/blob/master/BigData_Project_Explore.ipynb)*.
+*Note: we performed quite a lot of exploratory analyses but just summarize a few main points here. For more details, please go to the [Exploratory Analysis Notebook](BigData_Project_Explore.ipynb)*.
 
 #### Dataset Overview
 
